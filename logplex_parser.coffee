@@ -55,6 +55,7 @@ exports = module.exports = (options = {}) ->
         first = buf.trim()
         try
           for line in buf.split("\n")
+            lines = []
             if pairs = buf.match(/([a-zA-Z0-9\_\-\.]+)=?(([a-zA-Z0-9\.\-\_\.]+)|("([^\"]+)"))?/g)
               attrs = {}
               for pair in pairs
@@ -63,7 +64,8 @@ exports = module.exports = (options = {}) ->
                 value = parts.join("=")
                 value = value.substring(1, value.length-1) if value[0] is '"'
                 attrs[key] = value
-              req.body = attrs
+              lines.push(attrs)
+            req.body = lines
         catch err
           err.body = buf
           err.status = 400
