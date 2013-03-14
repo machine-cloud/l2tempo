@@ -1,25 +1,29 @@
-
 #
-# * GET home page.
+# * send readings to TempoDB when device=XXXX is true
 #
-exports.index = (req, res) ->
-  res.render "index",
-    title: "Express"
+# take all the readings reported in the logs and treat
+# the log event as the tempo event. so any lag from the
+# device to the log line to the request here will show.
+#
+# we can fix this by having the device send the time of
+# its log, but then we may still need to aggregate for
+# performance
+#
+# this implementation is considered "Good Enough"
 
 TempoDBClient = require("tempodb").TempoDBClient
 tempodb = new TempoDBClient(process.env.TEMPODB_API_KEY, process.env.TEMPODB_API_SECRET)
-
 
 exports.log_drain = (req, res) ->
   ts = new Date()
   data = []
   for readings in req.body
-    if readings.device_id
+    if readings.device
       data.push
-        key: "battery:" + readings.device_id
+        key: "battery:" + readings.device
         v: parseFloat(readings.battery)
       data.push
-        key: "temp:" + readings.device_id
+        key: "temp:" + readings.device
         v: parseFloat(readings.temp)
 
   if data[0]
