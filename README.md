@@ -3,7 +3,9 @@
 
 Look, ma! I'm sending logplex logs to TempoDB!
 
-Seriously, though, check out `byo.coffee` ->
-  it's a middleware that implements
-  it's a middleware that pulls key=value pairs from logplex
+## `logplex.coffee'
+  an express middleware that pulls key=value pairs from logplex
+  built from `byo`
 
+## `byo`
+  an express middleware that lets you Bring Your Owner bodyParser
