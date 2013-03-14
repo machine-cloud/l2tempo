@@ -12,7 +12,6 @@ exports.log_drain = (req, res) ->
   measurements = {}
   units = {}
   has_values = {}
-  console.log(req.headers)
   console.log(req.body)
   res.send('OK')
 ###

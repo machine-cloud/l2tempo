@@ -6,6 +6,7 @@ express = require("express")
 routes = require("./routes")
 http = require("http")
 path = require("path")
+logplex = require('./logplex_parser')
 app = express()
 app.configure ->
   app.set "port", process.env.PORT or 3000
@@ -13,8 +14,9 @@ app.configure ->
   app.use express.logger("dev")
   app.use express.methodOverride()
   app.use app.router
-###
   app.use express.bodyParser()
+  app.use logplex()
+###
   app.set "views", __dirname + "/views"
   app.set "view engine", "jade"
   app.use express.static(path.join(__dirname, "public"))
