@@ -12,4 +12,4 @@ You should probably steal most of that code.
   built from `byo`
 
 ## `byo`
-  an express middleware that lets you Bring Your Owner bodyParser
+  an express middleware that lets you Bring Your Own bodyParser
