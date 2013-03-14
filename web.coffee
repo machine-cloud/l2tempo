@@ -13,9 +13,9 @@ app.configure ->
   app.use express.favicon()
   app.use express.logger("dev")
   app.use express.methodOverride()
-  app.use app.router
-  app.use express.bodyParser()
   app.use logplex()
+  app.use express.bodyParser()
+  app.use app.router
 ###
   app.set "views", __dirname + "/views"
   app.set "view engine", "jade"
