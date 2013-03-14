@@ -29,6 +29,7 @@ app.configure "development", ->
   app.use express.errorHandler()
 
 app.post "/logs", routes.log_drain
+app.get  "/", (req, res) -> res.send("NOTHING TO SEE HERE")
 
 http.createServer(app).listen app.get("port"), ->
   console.log "Express server listening on port " + app.get("port")
