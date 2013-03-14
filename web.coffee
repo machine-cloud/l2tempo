@@ -3,11 +3,10 @@
 Module dependencies.
 ###
 express = require("express")
-routes = require("./routes")
 http = require("http")
 path = require("path")
-byo  = require('./byo')
-logplex = require('./logplex_parser')
+routes  = require("./routes")
+logplex = require("./logplex")
 app = express()
 
 
@@ -16,7 +15,7 @@ app.configure ->
   app.use express.favicon()
   app.use express.logger("dev")
   app.use express.methodOverride()
-  app.use byo(content_type: "application/logplex-1", parser: logplex)
+  app.use logplex()
   app.use express.bodyParser()
   app.use app.router
 ###
