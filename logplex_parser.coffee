@@ -54,7 +54,16 @@ exports = module.exports = (options = {}) ->
       req.on "end", ->
         first = buf.trim()
         try
-          req.body = buf
+          for line in buf.split("\n")
+            if pairs = buf.match(/([a-zA-Z0-9\_\-\.]+)=?(([a-zA-Z0-9\.\-\_\.]+)|("([^\"]+)"))?/g)
+              attrs = {}
+              for pair in pairs
+                parts = pair.split("=")
+                key   = parts.shift()
+                value = parts.join("=")
+                value = value.substring(1, value.length-1) if value[0] is '"'
+                attrs[key] = value
+              req.body = attrs
         catch err
           err.body = buf
           err.status = 400
