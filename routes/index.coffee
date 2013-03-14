@@ -12,8 +12,8 @@ exports.log_drain = (req, res) ->
   measurements = {}
   units = {}
   has_values = {}
-  #console.log(req.headers)
-  console.log(req.body)
+  for line in req.body
+    console.log(line)
   res.send('OK')
 ###
   log.start "logs", (logger) ->

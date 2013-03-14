@@ -6,14 +6,17 @@ express = require("express")
 routes = require("./routes")
 http = require("http")
 path = require("path")
+byo  = require('./byo')
 logplex = require('./logplex_parser')
 app = express()
+
+
 app.configure ->
   app.set "port", process.env.PORT or 3000
   app.use express.favicon()
   app.use express.logger("dev")
   app.use express.methodOverride()
-  app.use logplex()
+  app.use byo(content_type: "application/logplex-1", parser: logplex)
   app.use express.bodyParser()
   app.use app.router
 ###
