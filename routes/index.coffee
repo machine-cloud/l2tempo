@@ -19,7 +19,6 @@ exports.log_drain = (req, res) ->
   data = []
   for line in req.body
     if line.readings
-      readings = line
       console.log(line)
 
   if data[0]
@@ -31,11 +30,11 @@ exports.log_drain = (req, res) ->
     console.log("no-readings=true")
   res.send('OK')
 
-      ###=
-      data.push
-        key: "battery:" + readings.device_id
-        v: parseFloat(readings.battery)
-      data.push
-        key: "temp:" + readings.device_id
-        v: parseFloat(readings.temp)
-        ###
+###=
+data.push
+  key: "battery:" + readings.device_id
+  v: parseFloat(readings.battery)
+data.push
+  key: "temp:" + readings.device_id
+  v: parseFloat(readings.temp)
+  ###
