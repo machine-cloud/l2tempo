@@ -17,8 +17,8 @@ tempodb = new TempoDBClient(process.env.TEMPODB_API_KEY, process.env.TEMPODB_API
 exports.log_drain = (req, res) ->
   ts = new Date()
   data = []
-  for readings in req.body
-    if readings.device
+  for line in req.body
+    if readings = line.readings
       data.push
         key: "battery:" + readings.device
         v: parseFloat(readings.battery)
