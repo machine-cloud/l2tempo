@@ -5,7 +5,7 @@ Module dependencies.
 express = require("express")
 http = require("http")
 path = require("path")
-routes  = require("./routes")
+routes  = require("./log_drain")
 logplex = require("./logplex")
 app = express()
 
