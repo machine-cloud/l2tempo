@@ -1,5 +1,5 @@
 #
-# * send readings to TempoDB when device=XXXX is true
+# * send readings to TempoDB when readings=XXXX is true
 #
 # take all the readings reported in the logs and treat
 # the log event as the tempo event. so any lag from the
@@ -20,10 +20,10 @@ exports.log_drain = (req, res) ->
   for line in req.body
     if readings = line.readings
       data.push
-        key: "battery:" + readings.device
+        key: "battery:" + readings.device_id
         v: parseFloat(readings.battery)
       data.push
-        key: "temp:" + readings.device
+        key: "temp:" + readings.device_id
         v: parseFloat(readings.temp)
 
   if data[0]
