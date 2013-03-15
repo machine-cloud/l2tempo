@@ -19,7 +19,12 @@ exports.log_drain = (req, res) ->
   data = []
   for line in req.body
     if line.readings
-      console.log(line)
+      data.push
+        key: "battery:" + line.device_id
+        v: parseFloat(line.battery)
+      data.push
+        key: "temp:" + line.device_id
+        v: parseFloat(line.temp)
 
   if data[0]
     tempodb.write_bulk ts, data, (result) ->
@@ -29,12 +34,3 @@ exports.log_drain = (req, res) ->
   else
     console.log("no-readings=true")
   res.send('OK')
-
-###=
-data.push
-  key: "battery:" + readings.device_id
-  v: parseFloat(readings.battery)
-data.push
-  key: "temp:" + readings.device_id
-  v: parseFloat(readings.temp)
-  ###
