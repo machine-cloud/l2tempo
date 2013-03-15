@@ -22,7 +22,7 @@ exports.log_drain = (req, res) ->
       device = line.device_id
 
       data.push
-        key: "device:ThermoStat.temp.id:#{device}.series"
+        key: "device:ThermoStat.battery.id:#{device}.series"
         v: parseFloat(line.battery)
       data.push
         key: "device:ThermoStat.temp.id:#{device}.series"
