@@ -19,11 +19,13 @@ exports.log_drain = (req, res) ->
   data = []
   for line in req.body
     if line.readings
+      device = line.device_id
+
       data.push
-        key: "battery:" + line.device_id
+        key: "device:ThermoStat.temp.id:#{device}.series"
         v: parseFloat(line.battery)
       data.push
-        key: "temp:" + line.device_id
+        key: "device:ThermoStat.temp.id:#{device}.series"
         v: parseFloat(line.temp)
 
   if data[0]
