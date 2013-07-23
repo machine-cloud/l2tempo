@@ -5,8 +5,8 @@ Module dependencies.
 express = require("express")
 http = require("http")
 path = require("path")
+logfmt = require("logfmt")
 routes  = require("./log_drain")
-logplex = require("./logplex")
 app = express()
 
 app.configure ->
@@ -15,7 +15,7 @@ app.configure ->
   app.use express.logger("dev")
   app.use express.methodOverride()
   # LogPlex body parser
-  app.use logplex()
+  app.use logfmt.bodyParser()
   app.use express.bodyParser()
   app.use app.router
 ###

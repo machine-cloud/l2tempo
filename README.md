@@ -27,12 +27,3 @@ or set
     TEMPODB_API_PORT
     TEMPODB_API_SECRET
     TEMPODB_API_SECURE
-
-## `logplex`
-### at `logplex.coffee`
-  an express middleware that pulls key=value pairs from logplex
-  built from `byo`
-
-## `byo`
-### at `byo.coffee`
-  an express middleware that lets you Bring Your Own bodyParser
