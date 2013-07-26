@@ -11,13 +11,15 @@
 #
 # this implementation is considered "Good Enough"
 
+through = require('through')
 TempoDBClient = require("tempodb").TempoDBClient
 tempodb = new TempoDBClient(process.env.TEMPODB_API_KEY, process.env.TEMPODB_API_SECRET)
 
 exports.log_drain = (req, res) ->
   ts = new Date()
   data = []
-  for line in req.body
+
+  add_lines_to_data = (line) ->
     if line.readings
       device = line.device_id
 
@@ -28,11 +30,14 @@ exports.log_drain = (req, res) ->
         key: "device:ThermoStat.temp.id:#{device}.series"
         v: parseFloat(line.temp)
 
-  if data[0]
-    tempodb.write_bulk ts, data, (result) ->
-      out = result.response
-      console.log(result.body) unless out == '200'
-      console.log "tempodb=" + out
-  else
-    console.log("no-readings=true")
+  end = () ->
+    if data[0]
+      tempodb.write_bulk ts, data, (result) ->
+        out = result.response
+        console.log(result.body) unless out == '200'
+        console.log "tempodb=" + out
+    else
+      console.log("no-readings=true")
+
+  req.body.pipe(through(add_lines_to_data, end)) if req.body
   res.send('OK')

@@ -1,6 +1,6 @@
 {
   "name": "application-name",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "start": "node app"
@@ -9,6 +9,7 @@
     "express": "3.1.0",
     "jade": "*",
     "tempodb": "*",
-    "logfmt": "0.5.1"
+    "logfmt": "0.9.1",
+    "through" : "*"
   }
 }

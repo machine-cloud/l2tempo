@@ -15,7 +15,7 @@ app.configure ->
   app.use express.logger("dev")
   app.use express.methodOverride()
   # LogPlex body parser
-  app.use logfmt.bodyParser()
+  app.use logfmt.bodyParserStream()
   app.use express.bodyParser()
   app.use app.router
 ###
