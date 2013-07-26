@@ -9,7 +9,7 @@
     "express": "3.1.0",
     "jade": "*",
     "tempodb": "*",
-    "logfmt": "0.9.1",
+    "logfmt": "0.9.2",
     "through" : "*"
   }
 }
